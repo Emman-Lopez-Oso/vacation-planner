@@ -1,3 +1,13 @@
+// Display selected month
+function displaySelectedMonth() {
+  const selectedMonth = document.querySelector("input[name='month']:checked").value;
+  const monthName = new Date(2000, selectedMonth, 1).toLocaleString("default", { month: "long" });
+  document.getElementById("calendar").dataset.month = monthName;
+}
+
+// Call the function to display the initial month
+displaySelectedMonth();
+
 // Generate calendar
 const calendar = document.getElementById("calendar");
 const today = new Date();
@@ -17,6 +27,11 @@ calendar.addEventListener("click", (e) => {
   if (e.target.classList.contains("day")) {
     e.target.classList.toggle("selected");
   }
+});
+// Add this event listener inside the `scripts.js` file, after the calendar event listener
+document.getElementById("month").addEventListener("change", () => {
+  displaySelectedMonth();
+  updateCalendar();
 });
 
 const userForm = document.getElementById("userForm");

@@ -1,26 +1,41 @@
-// Display selected month
-function displaySelectedMonth() {
-  const selectedMonth = document.querySelector("input[name='month']:checked").value;
-  const monthName = new Date(2000, selectedMonth, 1).toLocaleString("default", { month: "long" });
-  document.getElementById("calendar").dataset.month = monthName;
-}
-
-// Call the function to display the initial month
-displaySelectedMonth();
-
 // Generate calendar
 const calendar = document.getElementById("calendar");
 const today = new Date();
 const startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-const endDate = new Date(today.getFullYear(), today.getMonth() + 11, 0);
 
-for (let day = startDate; day <= endDate; day.setDate(day.getDate() + 1)) {
-  const cell = document.createElement("div");
-  cell.classList.add("day");
-  cell.dataset.date = day.toISOString().slice(0, 10);
-  cell.textContent = day.getDate();
-  calendar.appendChild(cell);
+function displaySelectedMonth() {
+  const monthSelect = document.getElementById("month-select");
+  const selectedMonths = Array.from(monthSelect.selectedOptions).map(option => parseInt(option.value));
+  const monthNames = selectedMonths.map(month => new Date(2000, month, 1).toLocaleString("default", { month: "long" }));
+  document.getElementById("calendar").dataset.month = monthNames.join(", ");
 }
+
+function updateCalendar() {
+  // Get selected months
+  const monthSelect = document.getElementById("month-select");
+  const selectedMonths = Array.from(monthSelect.selectedOptions).map(option => parseInt(option.value));
+
+  // Clear the existing calendar
+  calendar.innerHTML = "";
+
+  // Generate the new calendar for each selected month
+  selectedMonths.forEach(selectedMonth => {
+    const start = new Date(today.getFullYear(), selectedMonth, 1);
+    const end = new Date(today.getFullYear(), selectedMonth + 1, 0);
+
+    for (let day = start; day <= end; day.setDate(day.getDate() + 1)) {
+      const cell = document.createElement("div");
+      cell.classList.add("day");
+      cell.dataset.date = day.toISOString().slice(0, 10);
+      cell.textContent = day.getDate();
+      calendar.appendChild(cell);
+    }
+  });
+}
+
+// Call the functions to display the initial month and calendar
+displaySelectedMonth();
+updateCalendar();
 
 // Add event listeners
 calendar.addEventListener("click", (e) => {
@@ -28,8 +43,8 @@ calendar.addEventListener("click", (e) => {
     e.target.classList.toggle("selected");
   }
 });
-// Add this event listener inside the `scripts.js` file, after the calendar event listener
-document.getElementById("month").addEventListener("change", () => {
+
+document.getElementById("month-select").addEventListener("change", () => {
   displaySelectedMonth();
   updateCalendar();
 });

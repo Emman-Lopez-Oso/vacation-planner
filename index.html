@@ -11,36 +11,38 @@
     <h1>Travel Planner</h1>
   </header>
   <main>
-    <section id="calendar"></section>
     <section id="userInput">
       <form id="userForm">
-        <label for="username">Name:</label>
-        <input type="text" id="username" required>
-        <!-- Add this code inside the <form> element, before the submit button -->
         <label for="month">Month:</label>
         <div id="month">
-          <input type="radio" id="month-0" name="month" value="0" checked>
-          <label for="month-0">January</label>
-          <label for="month-1">February</label>
-          <label for="month-2">March</label>
-          <label for="month-3">April</label>
-          <label for="month-4">April</label>
-          <label for="month-5">May</label>
-          <label for="month-6">June</label>
-          <label for="month-7">July</label>
-          <label for="month-8">August</label>
-          <label for="month-9">September</label>
-          <label for="month-10">October</label>
-          <label for="month-11">November</label>
-          <label for="month-12">December</label>
+        <input type="radio" id="month-0" name="month" value="0" checked>
+        <label for="month">Month:</label>
+        <div id="month">
+          <!-- Replace the existing month radio buttons with this multi-select box -->
+          <label for="month-select">Month:</label>
+          <select id="month-select" multiple>
+            <option value="0" selected>January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
         </div>
-
-        
-        <input type="submit" value="Add your available days">
-      </form>
-    </section>
-    <section id="users"></section>
-  </main>
+        <label for="username">Name:</label>
+      <input type="text" id="username" required>
+      <input type="submit" value="Add your available days">
+    </form>
+  </section>
+  <section id="calendar"></section>
+  <section id="users"></section>
+</main>
   <script src="scripts.js"></script>
 </body>
 </html>

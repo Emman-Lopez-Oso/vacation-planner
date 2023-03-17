@@ -13,13 +13,9 @@
   <main>
     <section id="userInput">
       <form id="userForm">
-        <label for="month">Month:</label>
-        <div id="month">
-        <input type="radio" id="month-0" name="month" value="0" checked>
-        <label for="month">Month:</label>
         <div id="month">
           <!-- Replace the existing month radio buttons with this multi-select box -->
-          <label for="month-select">Month:</label>
+          <label for="month-select">Month: (ctrl+click to add multiple)</label>
           <select id="month-select" multiple>
             <option value="0" selected>January</option>
             <option value="1">February</option>
@@ -34,6 +30,11 @@
             <option value="10">November</option>
             <option value="11">December</option>
           </select>
+          <!-- Add navigation buttons for the months below the month selection -->
+          <div id="month-navigation">
+            <button id="prev-month" disabled>&laquo; Previous</button>
+            <button id="next-month" disabled>Next &raquo;</button>
+          </div>
         </div>
         <label for="username">Name:</label>
       <input type="text" id="username" required>
